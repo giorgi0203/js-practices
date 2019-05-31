@@ -9,7 +9,12 @@ function mix() {
         try {
             prev = args[i](prev);//call
         } catch (error) {
-            errors.push(error)
+            errors.push({
+                name: error.name,
+                message: error.message,
+                stack: error.stack,
+                level: i
+            })
         }
 
     }
