@@ -11,9 +11,6 @@ function reduce(arr, cb, _acc) {
         throw new Error("Error: Third parameter required and has to be only string or number!");
     }
     let acc = _acc;
-    if (!acc) {
-        acc = arr[0];
-    }
     for (let i = 0; i < arr.length; i++) {
         acc = cb(acc, arr[i], i, arr);
     }
@@ -23,5 +20,5 @@ function reduce(arr, cb, _acc) {
 let res = reduce(arr, function (acc, item, i, arr) {
     console.log('acc: ' + (acc + item) + '; item: ' + item + "; index: " + i + '; array: ' + arr);
     return acc + item;
-}, 5);
+}, 0);
 console.log('returned value: ' + res);
