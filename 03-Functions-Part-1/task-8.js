@@ -6,10 +6,15 @@ function f(arr) {
     if (arr.length <= 0) {
         throw new Error("Error: parameter can't be an empty!");
     }
-
-    let el = arr.pop();
-    console.log(el);
-    f(arr);
+    if (arr.length == 1) {
+        let el = arr.splice(0, 1)[0];
+        console.log(el);
+        return;
+    } else {
+        let el = arr.splice(0, 1)[0];
+        console.log(el);
+        f(arr);
+    }
 }
 
 f([1, 2, 3]);

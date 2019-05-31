@@ -17,6 +17,6 @@ function some(arr, cb) {
 
 let res = some(arr, function (item, i, arr) {
     console.log('item: ' + item + "; index: " + i + '; array: ' + arr);
-    return item > 5;
+    return item > 2;
 });
 console.log('returned value: ' + res);
