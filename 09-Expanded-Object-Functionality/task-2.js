@@ -3,7 +3,10 @@ Object.prototype.mergeDeepRight = function (source) {
     function t(obj, data) {
         let keyes = Object.keys(obj);
         keyes.forEach((item) => {
-            if (typeof obj[item] == 'object' && !Array.isArray(obj[item])) {
+            if (typeof obj[item] == 'object' && !Array.isArray(obj[item]) && obj[item] != null) {
+                if (!data[item]) {//if we dont have property key create empty
+                    data[item] = {}
+                }
                 t(obj[item], data[item])
             } else if (Array.isArray(obj[item])) {
                 data[item].push(...obj[item]);
@@ -34,8 +37,14 @@ data.mergeDeepRight({
     contact: {
         email: 'baa@example.com',
         favorite: true,
+        d: null,
         meta: {
-            tags: ['vip']
+            tags: ['vip', 'c', { k: 'kk' }],
+            info: {
+                a: { c: 'cc' },
+                b: 'bb',
+                d: null
+            }
         }
     }
 });
