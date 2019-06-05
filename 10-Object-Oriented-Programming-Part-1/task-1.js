@@ -24,5 +24,5 @@ function CoffeeMachine(power) {
 var coffeeMachine = new CoffeeMachine(50000);
 coffeeMachine.waterAmount = 200;
 coffeeMachine.run();
-
-setTimeout(coffeeMachine.stop,)
+coffeeMachine.stop();
+// setTimeout(coffeeMachine.stop, 1500);//is ready
