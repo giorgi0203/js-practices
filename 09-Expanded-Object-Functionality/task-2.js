@@ -1,13 +1,14 @@
 Object.prototype.mergeDeepRight = function (source) {
-    t(source);
-    data = this;
-    function t(obj) {
+    t(source, this);
+    function t(obj, data) {
         let keyes = Object.keys(obj);
         keyes.forEach((item) => {
-            if (typeof obj[item] == 'object') {
-                t(obj[item])
+            if (typeof obj[item] == 'object' && !Array.isArray(obj[item])) {
+                t(obj[item], data[item])
+            } else if (Array.isArray(obj[item])) {
+                data[item].push(...obj[item]);
             } else {
-                Object.defineProperty(data, item, { value: Object.getOwnPropertyDescriptor(obj, item).value });
+                data[item] = obj[item];
             }
         });
         return;
@@ -38,3 +39,5 @@ data.mergeDeepRight({
         }
     }
 });
+
+console.log(data);
