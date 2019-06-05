@@ -22,7 +22,7 @@ function CoffeeMachine(power, capacity) {
         if (amount < 0) {
             throw new Error("water amount must be positive");
         }
-        if (amount + waterAmount > 400) {
+        if (amount + waterAmount > capacity) {
             throw new Error("You can't put more water, than 400");
         }
         waterAmount += amount;
