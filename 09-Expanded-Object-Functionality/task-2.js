@@ -9,6 +9,9 @@ Object.prototype.mergeDeepRight = function (source) {
                 }
                 t(obj[item], data[item])
             } else if (Array.isArray(obj[item])) {
+                if (!data[item]) {//if we dont have property key create empty
+                    data[item] = []
+                }
                 data[item].push(...obj[item]);
             } else {
                 data[item] = obj[item];
@@ -45,7 +48,9 @@ data.mergeDeepRight({
                 b: 'bb',
                 d: null
             }
-        }
+        },
+        d:'s',
+        a: []
     }
 });
 
