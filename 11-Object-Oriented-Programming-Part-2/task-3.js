@@ -1,8 +1,10 @@
-function Hamster() {}
+function Hamster() {
+  this.food = []
+}
 
 Hamster.prototype.food = []; // empty "stomach"
 
-Hamster.prototype.found = function(something) {
+Hamster.prototype.found = function (something) {
   this.food.push(something);
 };
 
