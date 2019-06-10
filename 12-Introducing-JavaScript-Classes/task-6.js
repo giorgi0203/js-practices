@@ -16,10 +16,11 @@ class Student extends User {
     }
 
     getCourse() {
-        return new Date().getFullYear() - this.year;
+        let currentCourse = new Date().getFullYear() - this.year;
+        return currentCourse > 5 ? 5 : currentCourse;
     }
 }
-var student = new Student('John', 'Smith', 2015);
+var student = new Student('John', 'Smith', 2012);
 
 console.log(student.name); // print 'John'
 console.log(student.surname); // print 'John'
