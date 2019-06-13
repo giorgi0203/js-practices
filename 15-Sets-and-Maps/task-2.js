@@ -50,8 +50,32 @@ class DB {
     }
 
     validateQuery(query) {
-        if (typeof person !== 'object') {
+        if (typeof query !== 'object') {
             throw new Error('parameter must be object');
+        }
+        let {
+            name,
+            age: { min: minAge, max: maxAge } = {},
+            country,
+            salary: { min: minSalary, max: maxSalary } = {}
+        } = query;
+        if (name != undefined && typeof name !== 'string') {
+            throw new Error('{name} field must be type string');
+        }
+        if (minAge != undefined && typeof minAge !== 'number') {
+            throw new Error('{age.min} field must be type number');
+        }
+        if (maxAge != undefined && typeof maxAge !== 'number') {
+            throw new Error('{age.max} field must be type number');
+        }
+        if (country != undefined && typeof country !== 'string') {
+            throw new Error('{country} field must be type string');
+        }
+        if (minSalary != undefined && typeof minSalary !== 'number') {
+            throw new Error('{salary.min} field must be type number');
+        }
+        if (maxSalary != undefined && typeof maxSalary !== 'number') {
+            throw new Error('{salary.max} field must be type number');
         }
     }
     create(person) {
@@ -107,6 +131,7 @@ class DB {
     }
 
     find(query) {
+        this.validateQuery(query);
         return new Map(Array.from(this.persons).filter((item) => {
             let res = false;
             if (query.name) {
