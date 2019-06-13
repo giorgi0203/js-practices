@@ -25,6 +25,29 @@ class DB {
             throw new Error('{salary} required field with type number');
         }
     }
+    validateUpdate(person) {
+        if (typeof person !== 'object') {
+            throw new Error('parameter must be object');
+        }
+        let {
+            name,
+            age,
+            country,
+            salary
+        } = person;
+        if (name != undefined && typeof name !== 'string') {
+            throw new Error('{name} field must be type string');
+        }
+        if (age != undefined && typeof age !== 'number') {
+            throw new Error('{age} field must be type number');
+        }
+        if (country != undefined && typeof country !== 'string') {
+            throw new Error('{country} field must be type string');
+        }
+        if (salary != undefined && typeof salary !== 'number') {
+            throw new Error('{salary} field must be type number');
+        }
+    }
     create(person) {
         //validate
         this.validate(person);
@@ -58,6 +81,7 @@ class DB {
     }
     update(id, person) {
         //validate
+        this.validateUpdate(person)
         if (!this.persons.has(id)) {
             throw new Error('{id} there is no such element in map');
         }
@@ -96,13 +120,13 @@ console.log(id3);
 // const customer = db.read(id1);
 // console.log(customer);
 
-// const customers = db.readAll(); // array of users
-// console.log(customers);
-// console.log("before update: " + JSON.stringify(db.read(id1)));
-// db.update(id1, { age: 22, name: "aa" }); // id
-// console.log("after update: " + JSON.stringify(db.read(id1)));
+const customers = db.readAll(); // array of users
+console.log("all persons: " + JSON.stringify(customers));
+console.log("before update: " + JSON.stringify(db.read(id1)));
+db.update(id1, { age: 22, name: "Giorgi" }); // id
+console.log("after update: " + JSON.stringify(db.read(id1)));
 // db.update(id1, {}); // id
 
-// console.log("before delete: " + db.readAll().length);
-// console.log("dlete result: " + db.delete(id1)); // true
-// console.log("after delete: " + db.readAll().length);
+console.log("before delete: " + db.readAll().length);
+console.log("dlete result: " + db.delete(id1)); // true
+console.log("after delete: " + db.readAll().length);
