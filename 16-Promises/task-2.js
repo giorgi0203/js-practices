@@ -7,7 +7,7 @@ function getCustomers(persons, countries) {
             if (person.verified) {
                 let index = countries.find(el => el.id === person.id);
                 if (index) {
-                    filtered.push({ ...person, ...countries[index] });
+                    filtered.push({ ...person, ...index });
                 } else {
                     reject(`We don't have information about country for this customer: ${person.name}`);
                 }
@@ -19,7 +19,7 @@ function getCustomers(persons, countries) {
 }
 const customers = [
     {
-        id: 'A2',
+        id: 'A1',
         name: 'Oliver',
         verified: true
     },
