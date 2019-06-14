@@ -5,6 +5,15 @@ class Customers {
     }
 
     add(customer) {
+        if (typeof customer !== 'object') {
+            throw new Error('parameter must be object');
+        }
+        if (customer.name == undefined || typeof customer.name !== 'sting') {
+            throw new Error('{name} is required and must be string');
+        }
+        if (customer.verified !== undefined && typeof customer.verified !== 'boolean') {
+            throw new Error('{verified} is optional and must be boolean');
+        }
         this.customers.push(customer);
     }
     [Symbol.iterator]() {
