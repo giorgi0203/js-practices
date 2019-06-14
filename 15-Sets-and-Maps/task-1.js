@@ -77,7 +77,9 @@ class DB {
         if (args.length > 0) {
             throw new Error('function readAll() don\'t takes parameters');
         }
-        return Array.from(this.persons.entries());
+        return Array.from(this.persons.entries()).map((item) => {
+            return item[1];
+        });
     }
     update(id, person) {
         //validate
@@ -122,11 +124,11 @@ console.log(id3);
 
 const customers = db.readAll(); // array of users
 console.log("all persons: " + JSON.stringify(customers));
-console.log("before update: " + JSON.stringify(db.read(id1)));
-db.update(id1, { age: 22, name: "Giorgi" }); // id
-console.log("after update: " + JSON.stringify(db.read(id1)));
-// db.update(id1, {}); // id
+// console.log("before update: " + JSON.stringify(db.read(id1)));
+// db.update(id1, { age: 22, name: "Giorgi" }); // id
+// console.log("after update: " + JSON.stringify(db.read(id1)));
+// // db.update(id1, {}); // id
 
-console.log("before delete: " + db.readAll().length);
-console.log("dlete result: " + db.delete(id1)); // true
-console.log("after delete: " + db.readAll().length);
+// console.log("before delete: " + db.readAll().length);
+// console.log("dlete result: " + db.delete(id1)); // true
+// console.log("after delete: " + db.readAll().length);

@@ -53,6 +53,12 @@ class DB {
         if (typeof query !== 'object') {
             throw new Error('parameter must be object');
         }
+        if (typeof query.age == 'object' && Object.getOwnPropertyNames(query.age).length == 0) {
+            throw new Error('parameter must not be empty object1');
+        }
+        if (typeof query.salary === 'object' && Object.getOwnPropertyNames(query.salary).length == 0) {
+            throw new Error('parameter must not be empty object');
+        }
         let {
             name,
             age: { min: minAge, max: maxAge } = {},
@@ -107,7 +113,9 @@ class DB {
         if (args.length > 0) {
             throw new Error('function readAll() don\'t takes parameters');
         }
-        return Array.from(this.persons.entries());
+        return Array.from(this.persons.entries()).map((item) => {
+            return item[1];
+        });
     }
     update(id, person) {
         //validate
@@ -222,12 +230,12 @@ let id2 = db.create(person2);
 let id3 = db.create(person3);
 const query = {
     country: 'ua',
-    age: {
-        min: 21
-    },
+    // age: {
+    //     // min: 21
+    // },
     salary: {
         min: 300,
-        max: 600
+        // max: 600
     }
 };
 const query2 = {
